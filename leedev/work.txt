@@ -1,0 +1,8 @@
+
+
+Copied and pasted models into portal/models.py, have not made migrations or added
+app to settings.py
+
+Need to add other apps for public, clientele, and pitching.
+
+Pitching will be for example sites to show leads ideas.
