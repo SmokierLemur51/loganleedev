@@ -46,6 +46,14 @@ class Client(models.Model):
         return self.company
 
 
+class ClientNote(models.Model):
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    content = models.TextField(null=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
 class Project(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
@@ -80,3 +88,25 @@ class ProjectTicket(models.Model):
 
     def __str__(self):
         return f"Project: {self.project.title} Ticket: {self.title}"
+
+
+class ProjectNote(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    content = models.TextField(null=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+class ProposalProject(models.Model):
+    # these will be used to create endpoints for potential customers to see
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    total_time_spent = models.FloatField(default=0.0)
+    hourly_rate = models.FloatField(default=0.0)
+    wholesale = models.FloatField(default=0.0)
+    subscription = models.FloatField(default=0.0)
+    lead = models.ForeignKey(Lead, on_delete=models.CASCADE)
+    status = models.ForeignKey(ProjectStatus, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
