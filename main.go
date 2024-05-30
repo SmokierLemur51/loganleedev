@@ -1,20 +1,13 @@
 package main
 
 import (
-  "os"
-  "log"
-  "net/http"
-  "github.com/SmokierLemur51/leedev/server"
+	"log"
+
+	"github.com/SmokierLemur51/minecraft-wms/handler"
 )
 
-func init() {
-  os.SetEnv("database", "testing")
-}
-
 func main() {
-  s := server.Server
-  s.ConfigServer()
-  
-  log.Println("Listening on port ", s.Port)
-  log.Fatal(http.ListenAndServe(s.Port, s.Router))
+	h := handler.NewCoreHandler()
+
+	log.Println(h.Run())
 }
